@@ -1,0 +1,59 @@
+<script>
+    import {onMount} from 'svelte';
+    let result=[];
+    onMount(async()=>{
+        const res=await fetch("https://jsonplaceholder.typicode.com/todos");
+        result=await res.json();
+    })
+
+</script>
+<div>
+
+    <h1>My Employee Data Record Sheet</h1>
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+    
+   <table class="table table-dark ">
+
+        <thead >
+        <tr class="header">
+            <th scope="col">UserId</th>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Completed</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {#each result as rs}
+        <tr scope="row">
+            <td>{rs.userId}</td>
+            <td>{rs.id}</td>
+            <td>{rs.title}</td>
+            <td>{rs.completed}</td>
+
+        </tr>
+        {/each}
+        </tbody>
+    </table>
+</div>
+</div>
+<style>
+ 
+    h1{
+        text-align: center;
+    }
+    table{
+        margin-right:5%;
+    }
+
+    .my-custom-scrollbar {
+position: relative;
+height: 600px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+
+</style>
